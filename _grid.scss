@@ -1,0 +1,107 @@
+// Appetizer v1.0.0
+// Free to use under the MIT License.
+ 
+//
+// Media Queries
+//
+
+$query-breakpoint: em(768px);
+ 
+$small-screen: "only screen and (max-width:"#{$query-breakpoint}")";
+$large-screen: "only screen and (min-width:"#{$query-breakpoint + em(1px)}")";
+
+//
+// Grid
+//
+
+$grid-width: em(960px) !default;
+$grid-columns-total: 12 !default;
+$grid-columns-gutter: em(32px) !default;
+
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.row {
+  width: 100%;
+  min-width: 320px;
+  max-width: $grid-width;
+  margin: 0 auto;
+  zoom: 1;
+}
+
+.row:after {
+  clear: both;
+}
+
+.row:before, 
+.row:after {
+  content: " ";
+  display: table;
+}
+
+.row .row {
+  width: auto;
+  max-width: none;
+  margin: 0 -($grid-columns-gutter / 2);
+}
+
+.column, 
+.columns {
+  position: relative;
+  float: left;
+  padding: 0 ($grid-columns-gutter / 2);
+}
+
+.column:last-child, 
+.columns:last-child {
+  float: right;
+}
+
+.column:first-child, 
+.columns:first-child {
+  float: left;
+}
+
+@for $i from 1 through $grid-columns-total {
+  @media #{$small-screen} {
+    .row .large-#{$i} { 
+      width: 100%;
+    }
+  
+    .row .large-offset-#{$i} { 
+      margin-left: auto;
+    }
+    
+    .row .small-#{$i} { 
+      width: ($i / $grid-columns-total * 100%);
+      background-color: red;
+    }
+  
+    .row .small-offset-#{$i} { 
+      margin-left: ($i / $grid-columns-total * 100%);
+    }
+    
+    .row .small-centered {
+      margin: 0 auto;
+      float: none;
+    }
+  }
+    
+  @media #{$large-screen} {    
+    .row .large-#{$i} { 
+      width: ($i / $grid-columns-total * 100%);
+    }
+  
+    .row .large-offset-#{$i} { 
+      margin-left: ($i / $grid-columns-total * 100%);
+    }
+    
+    .row .large-centered {
+      margin: 0 auto;
+      float: none;
+    }
+  }  
+}

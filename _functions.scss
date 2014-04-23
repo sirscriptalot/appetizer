@@ -1,0 +1,19 @@
+// Appetizer v1.0.0
+// Free to use under the MIT License.
+
+$base-font-size: 16px !default;
+$base-line-height: 1.5em !default;
+
+// Strips off units of measurements. Ex. 16px => 16
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+// Converts "px" values to "em" use $base-font-size
+@function em($value, $context: $base-font-size) {
+  @if unit($value) == "em" { @return $value }
+    
+  $value: strip-unit($value) / strip-unit($context) * 1em;
+  @if ($value == 0em) { $value: 0; } // Turn 0em into 0
+  @return $value;
+}
